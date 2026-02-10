@@ -4,4 +4,38 @@
   width: 100vw;
   height: 100vh;
   max-width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Fenster rechts: zeigt nur die Hälfte */
+.wheel-cut {
+  position: fixed;
+  right: -500px;
+  /* Positioniere den Container ganz rechts */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100vh;
+  /* Nur die Hälfte der Rad-Breite anzeigen */
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.wheel {
+  width: 200vh;
+  height: 200vh;
+  position: absolute;
+  left: 0;
+  /* Das Rad startet am linken Rand des Containers */
+  top: 50%;
+  margin-top: -100vh;
+  /* Vertikal zentrieren */
+  /* translateX entfernen wir hier komplett! */
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.debug-spacer {
+  height: 200vh;
 }
