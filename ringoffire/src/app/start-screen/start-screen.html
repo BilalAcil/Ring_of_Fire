@@ -1,7 +1,16 @@
-<div class="start-screen">
+<div class="start-screen" (mousemove)="onMove($event)">
+  <div class="header-container">
+    <div class="title-area">
+      <h1 class="ultra-font" [class.glow]="isMoving">RING <br> OF <br> FIRE</h1>
+    </div>
+    <div class="button-area">
+      <button class="flame-btn" type="button">
+        <span class="flame" aria-hidden="true"></span>
+        <span class="label">START GAME</span>
+      </button>
+    </div>
+  </div>
   <div class="wheel-cut">
     <img #wheelEl class="wheel" src="/img/startbild_transparent-1.png" alt="Kreis" />
   </div>
 </div>
-
-<div class="debug-spacer"></div>

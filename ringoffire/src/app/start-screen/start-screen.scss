@@ -1,11 +1,39 @@
 .start-screen {
-  background: radial-gradient(circle at center, #2b2b2b 0%, #121212 45%, #000 100%);
-  color: #fff;
+  /* Maus-Position als CSS Variablen (Default = Mitte) */
+  --mx: 50vw;
+  --my: 50vh;
+
   width: 100vw;
   height: 100vh;
   max-width: 100%;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
+  color: #fff;
+  z-index: 2;
+
+  /* Basis komplett schwarz */
+  background: #000;
+}
+
+/* Taschenlampen-Licht als Overlay */
+.start-screen::before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: background-position 0.02s linear;
+
+  /* Maus klickt weiterhin durch */
+
+  /* Spotlight: hell in der Mitte, fällt nach außen ab */
+  background: radial-gradient(circle 220px at var(--mx) var(--my),
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 35%,
+      rgba(0, 0, 0, 0) 70%);
+
+  /* Optional: macht das Licht weicher */
+  filter: blur(2px);
 }
 
 /* Fenster rechts: zeigt nur die Hälfte */
@@ -36,6 +64,134 @@
   will-change: transform;
 }
 
-.debug-spacer {
-  height: 200vh;
+.header-container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  margin: 0 0 0 5vw;
+  font-size: clamp(90px, 12vw, 230px);
+  color: #111;
+  transition: text-shadow 300ms ease;
+  cursor: default;
+}
+
+h1.glow {
+  text-shadow:
+    0 0 10px #c3352889,
+    0 0 18px #c3352889;
+}
+
+:root {
+  --flame-color: #ff4500;
+  --flame-bright: #ffca28;
+}
+
+.title-area {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 24px;
+  height: 100%;
+  margin-bottom: 164px;
+}
+
+.button-area {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 150px;
+  width: 100%;
+  justify-content: center;
+  margin-right: 18vw;
+}
+
+/* Button-Grundstyle */
+.flame-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px 22px;
+
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+
+  cursor: pointer;
+  user-select: none;
+
+  /* Text */
+  font-family: fantasy, cursive;
+  color: #eaeaea;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+
+  backdrop-filter: blur(6px);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.flame-btn:hover {
+  transform: translateY(-1px) scale(1.02);
+  border-color: rgba(255, 120, 60, 0.55);
+  box-shadow: 0 0 18px rgba(195, 53, 40, 0.25);
+}
+
+/* ===== Flamme ===== */
+.flame {
+  width: 18px;
+  height: 28px;
+  position: relative;
+  display: inline-block;
+
+  /* Grundanimation */
+  transform-origin: 50% 100%;
+  animation: flicker 0.14s infinite alternate ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(195, 53, 40, 0.45));
+}
+
+/* Flammenkörper (außen) */
+.flame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 55% 55% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 50% 70%, #ffca28 0%, #ff6a00 45%, #c33528 90%);
+  transform: rotate(10deg);
+}
+
+/* Flammenkern (innen) */
+.flame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 9px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50% 50% 55% 55% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 50% 70%, #fff3c4 0%, #ffca28 55%, rgba(255, 202, 40, 0) 85%);
+  opacity: 0.95;
+}
+
+/* Hover: Flamme größer + stärkerer Glow */
+.flame-btn:hover .flame {
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 16px rgba(195, 53, 40, 0.7));
+}
+
+/* Flackern */
+@keyframes flicker {
+  0% {
+    transform: translateY(0) scale(1) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateY(-1px) scale(1.06) rotate(2deg);
+  }
 }
