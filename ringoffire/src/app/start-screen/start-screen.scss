@@ -180,6 +180,13 @@ h1.glow {
   filter: drop-shadow(0 0 25px rgba(255, 106, 0, 0.8));
 }
 
+.flame-btn:hover .label {
+  background: linear-gradient(to bottom, #ffca28, #ff6a00);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(255, 106, 0, 0.4));
+}
+
 /* Flackern */
 @keyframes flicker {
   0% {
