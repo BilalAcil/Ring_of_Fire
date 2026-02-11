@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-start-screen',
@@ -8,6 +9,8 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
   styleUrl: './start-screen.scss',
 })
 export class StartScreen {
+  constructor(private router: Router) { }
+
   @ViewChild('wheelEl', { static: true }) wheelEl!: ElementRef<HTMLImageElement>;
 
   @HostListener('window:scroll')
@@ -33,6 +36,10 @@ export class StartScreen {
     this.moveTimer = setTimeout(() => {
       this.isMoving = false;
     }, 2000);
+  }
+
+  newGame() {
+    this.router.navigate(['/game']);
   }
 
 }
