@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './game.html',
   styleUrls: ['./game.scss'],
 })
-export class Game { }
+export class Game implements OnInit {
+  pickCardAnimation = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
+  takeCard() {
+    this.pickCardAnimation = true;
+  }
+}
