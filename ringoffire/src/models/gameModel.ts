@@ -1,11 +1,11 @@
 export class GameModel {
   players: string[] = [];
   stack: string[] = [];
-  playerCards: string[] = [];
+  playedCards: string[] = [];
   currentPlayer = 0;
 
   constructor() {
-    const suits = ['clubs', 'diamonds', 'hearts', 'spades'];
+    const suits = ['clubs', 'diamonds', 'hearts', 'ace'];
     for (const suit of suits) {
       for (let i = 1; i <= 13; i++) {
         this.stack.push(`${suit}_${i}`);
