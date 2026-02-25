@@ -1,5 +1,5 @@
 export class GameModel {
-  players: string[] = [];
+  players: string[] = ['Hans', 'Franz', 'Peter', 'Lisa'];
   stack: string[] = [];
   playedCards: string[] = [];
   currentPlayer = 0;

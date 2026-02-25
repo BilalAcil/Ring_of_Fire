@@ -1,0 +1,30 @@
+.player {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+
+
+  span {
+    font-size: 32px;
+    margin-left: 16px;
+  }
+
+  background-color: orange;
+
+  img {
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    object-fit: cover;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+
+}
+
+:host.player-position {
+  position: absolute;
+  right: 0;
+}

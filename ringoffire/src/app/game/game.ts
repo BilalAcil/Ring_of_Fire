@@ -1,11 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameModel } from '../../models/gameModel';
+import { Player } from '../player/player';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Player],
   templateUrl: './game.html',
   styleUrls: ['./game.scss'],
 })
