@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayer } from '../dialog-add-player/dialog-add-player';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-game',
@@ -20,7 +21,7 @@ export class Game implements OnInit {
   currentCard = '';
   isAnimating = false;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.newGame();
@@ -65,10 +66,13 @@ export class Game implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayer);
 
     dialogRef.afterClosed().subscribe(name => {
-      if (name && name.trim()) {
-        this.game.players.push(name.trim());
-      }
-    }
-    );
+      const trimmed = (name ?? '').trim();
+      if (!trimmed) return;
+
+      setTimeout(() => {
+        this.game.players = [...this.game.players, trimmed];
+        this.cdr.detectChanges(); // optional, aber oft "bombensicher"
+      }, 0);
+    });
   }
 }
